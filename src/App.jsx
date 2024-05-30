@@ -1,34 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import { createStore } from 'redux'
+import reducer from './reducer'
 
-function App() {
-  const [count, setCount] = useState(0)
+const store = createStore(reducer)
+
+const App = () => {
+  const [state, setState] = useState(store.getState())
+
+  useEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      setState(store.getState())
+    })
+    return () => unsubscribe()
+  }, [])
+
+  const good = () => {
+    store.dispatch({ type: 'GOOD' })
+  }
+
+  const ok = () => {
+    store.dispatch({ type: 'OK' })
+  }
+
+  const bad = () => {
+    store.dispatch({ type: 'BAD' })
+  }
+
+  const resetStats = () => {
+    store.dispatch({ type: 'ZERO' })
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <button onClick={good}>good</button>
+      <button onClick={ok}>ok</button>
+      <button onClick={bad}>bad</button>
+      <button onClick={resetStats}>reset stats</button>
+      <div>good {state.good}</div>
+      <div>ok {state.ok}</div>
+      <div>bad {state.bad}</div>
+    </div>
   )
 }
 
