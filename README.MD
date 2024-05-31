@@ -18,4 +18,6 @@ Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This cou
 
 - [x] May 30, 2024
   - [x] 6.1 - b.2 [part6-a-uncafe](https://github.com/kxzb-fun/Full-Stack-Open-Course-Part6/tree/main/part6-a-unicafe)
-  - [ ] Anecdotes
+  - [x] Anecdotes 6.3 - 6.8
+- [x] May 31, 2024
+  - [x] Anecdotes 6.9
