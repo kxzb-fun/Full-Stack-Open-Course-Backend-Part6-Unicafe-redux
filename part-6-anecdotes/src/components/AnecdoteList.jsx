@@ -6,6 +6,7 @@ const AnecdoteList = () => {
   const anecdotes = [...useSelector((state) => state.anecdotes)].sort(
     (a, b) => b.votes - a.votes
   );
+
   const filter = useSelector((state) => state.filter);
 
   const filteredAnecdotes = anecdotes.filter(anecdote =>
