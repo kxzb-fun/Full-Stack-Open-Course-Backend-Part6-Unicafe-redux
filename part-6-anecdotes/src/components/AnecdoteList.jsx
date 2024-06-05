@@ -2,7 +2,8 @@ import AddVote from "./AddVote.jsx";
 import { useSelector } from "react-redux";
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector((state) => state.anecdotes).sort(
+  // NB AnecdoteList.jsx:5 Uncaught TypeError: Cannot assign to read only property '0' of object '[object Array]' at Array.sort
+  const anecdotes = [...useSelector((state) => state.anecdotes)].sort(
     (a, b) => b.votes - a.votes
   );
   const filter = useSelector((state) => state.filter);
