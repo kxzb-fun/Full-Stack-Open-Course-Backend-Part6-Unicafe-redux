@@ -20,7 +20,7 @@ const AnecdoteList = () => {
           <div>{anecdote.content}</div>
           <div>
             has {anecdote.votes}
-            <AddVote id={anecdote.id} />
+            <AddVote data={{...anecdote,votes:anecdote.votes+1}} />
           </div>
         </div>
       ))}

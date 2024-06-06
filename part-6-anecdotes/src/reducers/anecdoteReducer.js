@@ -61,4 +61,11 @@ export const addNew = content => {
   }
 }
 
+export const updateVote = data => {
+  return  async dispatch => {
+    const currentVote = await anecdoteServer.updateAnecdoteVote(data)
+    dispatch(addVote(currentVote))
+  }
+}
+
 export default anecdoteSlice.reducer;
