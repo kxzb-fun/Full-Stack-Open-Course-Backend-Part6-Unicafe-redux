@@ -6,7 +6,10 @@ import { getAnecdotes, updateAnecdoteVotes } from './request'
 const App = () => {
   const newVotes = useMutation({
     mutationFn: updateAnecdoteVotes,
-    onSuccess: () => {
+    onSuccess: (newData) => {
+      // 性能优化 NB
+      const anecdotes = queryClient.getQueryData(['anecdotes'])
+      queryClient.setQueryData(['anecdotes'], anecdotes.concat(newData))
       queryClient.invalidateQueries('anecdotes')
     },
   })
