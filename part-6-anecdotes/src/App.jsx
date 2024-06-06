@@ -12,7 +12,7 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(initAnecdotes()) 
-  }, [dispatch]) 
+  }) 
 
   const notification = useSelector(state => state.notification);
   console.log(notification);

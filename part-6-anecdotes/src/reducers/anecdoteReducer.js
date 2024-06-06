@@ -33,21 +33,31 @@ const anecdoteSlice = createSlice({
         anecdote.votes += 1;
       }
     },
-    addNew: (state, action) => {
-      state.push(action.payload);
-    },
+    // addNew: (state, action) => {
+    //   state.push(action.payload);
+    // },
     setAnecdote(state, action) {
       return action.payload
+    },
+    appendAnecdote(state, action) {
+      state.push(action.payload)
     }
   }
 });
 
-export const { addVote, addNew, setAnecdote } = anecdoteSlice.actions;
+export const { addVote, setAnecdote, appendAnecdote } = anecdoteSlice.actions;
 
 export const  initAnecdotes = ()=> {
   return async dispatch => {
     const anecdotes = await anecdoteServer.getAll()
     dispatch(setAnecdote(anecdotes))
+  }
+}
+
+export const addNew = content => {
+  return async dispatch => {
+    const newNote = await anecdoteServer.createNew(content)
+    dispatch(appendAnecdote(newNote))
   }
 }
 
