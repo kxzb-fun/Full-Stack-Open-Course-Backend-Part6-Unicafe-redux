@@ -1,6 +1,6 @@
 import { updateVote } from "../reducers/anecdoteReducer";
 import { useDispatch } from "react-redux";
-import { setNotification } from '../reducers/notificationReducer';
+import { setNotificationWithTimeout } from '../reducers/notificationReducer';
 
 // eslint-disable-next-line react/prop-types
 const AddVote = ({ data }) => {
@@ -9,7 +9,7 @@ const AddVote = ({ data }) => {
   const vote = (data) => {
     console.log("vote", data);
     dispatch(updateVote(data));
-    dispatch(setNotification('Anecdote voted'));
+    dispatch(setNotificationWithTimeout('Anecdote voted', 1));
   };
 
   return <button onClick={() => vote(data)}>vote</button>;
