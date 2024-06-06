@@ -1,11 +1,20 @@
-const AnecdoteForm = () => {
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getAnecdotes, createAnecdotes } from '../request'
 
+const AnecdoteForm = () => {
+  const queryClient = useQueryClient()
+  const newAnecdotes = useMutation({
+    mutationFn: createAnecdotes, onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
+    },
+  })
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
     console.log('new anecdote')
-}
+    newAnecdotes.mutate({ content, votes: 0 })
+  }
 
   return (
     <div>
